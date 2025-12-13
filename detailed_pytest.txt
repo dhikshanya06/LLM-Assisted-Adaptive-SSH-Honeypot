@@ -1,0 +1,5 @@
+Command 'pytest' not found, did you mean:
+  command 'yptest' from deb yp-tools (4.2.3-3)
+  command 'ptest' from deb pbuilder-scripts (22)
+  command 'ptest' from deb parmetis-test (4.0.3-5build1)
+Try: sudo apt install <deb name>
