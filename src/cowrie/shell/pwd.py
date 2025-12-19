@@ -142,14 +142,9 @@ class Passwd:
                 return e
         raise KeyError("getpwuid(): uid not found in passwd file: " + str(uid))
 
-    def setpwentry(self, name: str) -> dict[str, Any]:
-        """
-        If the user is not in /etc/passwd, creates a new user entry for the session
-        """
-
         # ensure consistent uid and gid
         seed_id = crc32(name.encode("utf-8"))
-        seed(seed_id)
+        r = random.Random(seed_id)
 
         e: dict[str, Any] = {}
         e["pw_name"] = name
@@ -157,7 +152,7 @@ class Passwd:
         e["pw_gecos"] = 0
         e["pw_dir"] = "/home/" + name
         e["pw_shell"] = "/bin/bash"
-        e["pw_uid"] = randint(1500, 10000)
+        e["pw_uid"] = r.randint(1500, 10000)
         e["pw_gid"] = e["pw_uid"]
         self.passwd.append(e)
         return e

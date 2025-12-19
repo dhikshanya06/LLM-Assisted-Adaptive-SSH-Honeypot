@@ -11,6 +11,7 @@ from twisted.conch.error import ConchError
 from twisted.conch.interfaces import IConchUser, ISession, ISFTPServer
 from twisted.conch.ssh import filetransfer as conchfiletransfer
 from twisted.conch.ssh.connection import OPEN_UNKNOWN_CHANNEL_TYPE
+import random
 from twisted.python import components, log
 
 from cowrie.core.config import CowrieConfig
@@ -26,6 +27,8 @@ class CowrieUser(avatar.ConchUser):
     def __init__(self, username: bytes, server: server.CowrieServer) -> None:
         avatar.ConchUser.__init__(self)
         self.username: str = username.decode("utf-8")
+        self.username: str = username.decode("utf-8")
+        
         self.server = server
 
         self.channelLookup[b"session"] = sshsession.HoneyPotSSHSession

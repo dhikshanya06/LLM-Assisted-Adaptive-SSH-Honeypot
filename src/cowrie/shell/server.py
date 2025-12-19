@@ -56,7 +56,14 @@ class CowrieServer:
     def __init__(self, realm: IRealm) -> None:
         self.fs: fs.HoneyPotFilesystem | None = None
         self.process = None
-        self.hostname: str = CowrieConfig.get("honeypot", "hostname", fallback="svr04")
+        hostname_raw = CowrieConfig.get("honeypot", "hostname", fallback="svr04")
+        if "," in hostname_raw:
+            hostnames = [h.strip() for h in hostname_raw.split(",")]
+            self.hostname = random.SystemRandom().choice(hostnames)
+        else:
+            self.hostname = hostname_raw
+        
+        log.msg(f"Emulated server initialized with hostname: {self.hostname}")
         try:
             arches = [
                 arch.strip()

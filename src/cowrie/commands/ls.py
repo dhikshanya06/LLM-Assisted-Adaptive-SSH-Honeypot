@@ -1,13 +1,9 @@
-# Copyright (c) 2009 Upi Tamminen <desaster@gmail.com>
-# See the COPYRIGHT file for more information
-
 from __future__ import annotations
-
+from twisted.python import log
 import getopt
 import os.path
 import stat
 import time
-
 from cowrie.shell import fs
 from cowrie.shell.command import HoneyPotCommand
 from cowrie.shell.pwd import Group, Passwd
@@ -101,23 +97,44 @@ class Command_ls(HoneyPotCommand):
         if not files:
             return
 
-        line = [x[fs.A_NAME] for x in files]
-        if not line:
+        # Use a list of tuples (visible_name, color_name)
+        # where color_name is the name with ANSI codes
+        file_list = []
+        for f in files:
+            name = f[fs.A_NAME]
+            color_name = name
+            if f[fs.A_TYPE] == fs.T_DIR:
+                color_name = f"\033[1;34m{name}\033[0m"
+            elif f[fs.A_TYPE] == fs.T_LINK:
+                color_name = f"\033[1;36m{name}\033[0m"
+            elif f[fs.A_MODE] & stat.S_IXUSR:
+                color_name = f"\033[1;32m{name}\033[0m"
+            file_list.append((name, color_name))
+
+        if not file_list:
             return
-        count = 0
-        maxlen = max(len(x) for x in line)
+
+        maxlen = max(len(x[0]) for x in file_list)
 
         try:
-            wincols = self.protocol.user.windowSize[1]
-        except AttributeError:
+            wincols = int(self.environ.get("COLUMNS", 80))
+        except Exception:
+            wincols = 80
+
+        if wincols <= 0:
             wincols = 80
 
         perline = int(wincols / (maxlen + 1))
-        for f in line:
+        if perline <= 0:
+            perline = 1
+
+        count = 0
+        for name, color_name in file_list:
             if count == perline:
                 count = 0
                 self.write("\n")
-            self.write(f.ljust(maxlen + 1))
+            # We use name for padding but color_name for writing
+            self.write(color_name + " " * (maxlen + 1 - len(name)))
             count += 1
         self.write("\n")
 
@@ -154,6 +171,14 @@ class Command_ls(HoneyPotCommand):
                 filesize_str_extent = max(len(size) for size in formatted_sizes)
             else:
                 formatted_sizes = [str(x[fs.A_SIZE]) for x in files]
+
+        try:
+            wincols = int(self.environ.get("COLUMNS", 80))
+        except (TypeError, ValueError):
+            wincols = 80
+
+        if wincols <= 0:
+            wincols = 80
 
         user_name_str_extent = 0
         if len(files):
@@ -203,11 +228,17 @@ class Command_ls(HoneyPotCommand):
 
             linktarget = ""
 
+            name = file[fs.A_NAME]
+            color_name = name
             if file[fs.A_TYPE] == fs.T_DIR:
                 perms[0] = "d"
+                color_name = f"\033[1;34m{name}\033[0m"
             elif file[fs.A_TYPE] == fs.T_LINK:
                 perms[0] = "l"
+                color_name = f"\033[1;36m{name}\033[0m"
                 linktarget = f" -> {file[fs.A_TARGET]}"
+            elif file[fs.A_MODE] & stat.S_IXUSR:
+                color_name = f"\033[1;32m{name}\033[0m"
 
             permstr = "".join(perms)
             ctime = time.localtime(file[fs.A_CTIME])
@@ -218,7 +249,7 @@ class Command_ls(HoneyPotCommand):
                 self.gid2name(file[fs.A_GID]).ljust(group_name_str_extent),
                 formatted_sizes[i].rjust(filesize_str_extent),
                 time.strftime("%Y-%m-%d %H:%M", ctime),
-                file[fs.A_NAME],
+                color_name,
                 linktarget,
             )
 
