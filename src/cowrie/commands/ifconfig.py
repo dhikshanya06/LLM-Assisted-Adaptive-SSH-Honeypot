@@ -65,7 +65,27 @@ class Command_ifconfig(HoneyPotCommand):
         tx_packets = self.calculate_packets(tx_bytes_eth0)
         lo_packets = self.calculate_packets(lo_bytes)
 
-        result = """eth0      Link encap:Ethernet  HWaddr {}
+        lo_result = """lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:{} errors:0 dropped:0 overruns:0 frame:0
+          TX packets:{} errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:{} ({} MB)  TX bytes:{} ({} MB)""".format(
+            lo_packets,
+            lo_packets,
+            lo_bytes,
+            lo_mb,
+            lo_bytes,
+            lo_mb,
+        )
+
+        if self.interaction_level == 1:
+            self.write(f"{lo_result}\n")
+            return
+
+        eth0_result = """eth0      Link encap:Ethernet  HWaddr {}
           inet addr:{}  Bcast:{}.255  Mask:255.255.255.0
           inet6 addr: {} Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
@@ -74,15 +94,7 @@ class Command_ifconfig(HoneyPotCommand):
           collisions:0 txqueuelen:1000
           RX bytes:{} ({} MB)  TX bytes:{} ({} MB)
 
-
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:{} errors:0 dropped:0 overruns:0 frame:0
-          TX packets:{} errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:{} ({} MB)  TX bytes:{} ({} MB)""".format(
+""".format(
             HWaddr,
             self.protocol.kippoIP,
             self.protocol.kippoIP.rsplit(".", 1)[0],
@@ -93,14 +105,9 @@ lo        Link encap:Local Loopback
             rx_mb_eth0,
             tx_bytes_eth0,
             tx_mb_eth0,
-            lo_packets,
-            lo_packets,
-            lo_bytes,
-            lo_mb,
-            lo_bytes,
-            lo_mb,
         )
-        self.write(f"{result}\n")
+        
+        self.write(f"{eth0_result}{lo_result}\n")
 
 
 commands["/sbin/ifconfig"] = Command_ifconfig

@@ -56,7 +56,19 @@ class CowrieServer:
     def __init__(self, realm: IRealm) -> None:
         self.fs: fs.HoneyPotFilesystem | None = None
         self.process = None
-        self.hostname: str = CowrieConfig.get("honeypot", "hostname", fallback="svr04")
+        configured_hostname = CowrieConfig.get("honeypot", "hostname", fallback="svr04")
+        if configured_hostname == "svr04":
+            # User wants dynamic hostnames
+            common_hostnames = [
+                "svr04", "svr01", "svr02", "svr03", "svr05",
+                "prod-db-01", "web-01", "backup-01", "ubuntu-s-1vcpu-1gb",
+                "ns1", "mail", "dev-box", "staging"
+            ]
+            self.hostname: str = random.choice(common_hostnames)
+            log.msg(f"DEBUG: Randomized hostname to {self.hostname} (Configured was {configured_hostname})")
+        else:
+            self.hostname: str = configured_hostname
+            log.msg(f"DEBUG: Using static hostname {self.hostname} (Configured was {configured_hostname})")
         try:
             arches = [
                 arch.strip()
@@ -83,6 +95,29 @@ class CowrieServer:
         Do this so we can trigger it later. Not all sessions need file system
         """
         self.fs = fs.HoneyPotFilesystem(self.arch, home)
+
+        # Sync filesystem hostname with random hostname
+        try:
+            # Update /etc/hostname
+            hostname_bytes = (self.hostname + "\n").encode('utf8')
+            passwd_file = self.fs.getfile("/etc/hostname")
+            if passwd_file:
+                passwd_file[fs.A_CONTENTS] = hostname_bytes
+                passwd_file[fs.A_SIZE] = len(hostname_bytes)
+                passwd_file[fs.A_REALFILE] = None
+
+            # Update /etc/hosts (simple replacement)
+            hosts_file = self.fs.getfile("/etc/hosts")
+            if hosts_file and isinstance(hosts_file[fs.A_CONTENTS], bytes):
+                 old_hosts = hosts_file[fs.A_CONTENTS].decode('utf8', errors='ignore')
+                 new_hosts = old_hosts.replace("svr04", self.hostname)
+                 hosts_file[fs.A_CONTENTS] = new_hosts.encode('utf8')
+                 hosts_file[fs.A_SIZE] = len(hosts_file[fs.A_CONTENTS])
+                 hosts_file[fs.A_REALFILE] = None
+            
+            log.msg(f"Synced filesystem hostname to: {self.hostname}")
+        except Exception as e:
+            log.msg(f"Failed to sync hostname to filesystem: {e}")
 
         try:
             self.process = self.getCommandOutput(

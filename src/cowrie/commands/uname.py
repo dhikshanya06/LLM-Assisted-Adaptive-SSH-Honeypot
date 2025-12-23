@@ -101,7 +101,10 @@ class Command_uname(HoneyPotCommand):
 
         if not self.args:
             # IF no params output default
-            self.write(f"{kernel_name()}\n")
+            if self.interaction_level == 1:
+                self.write(f"{kernel_name()}\n")
+            else:
+                self.write(f"{kernel_name()}\n")
             return
 
         # getopt-style parsing
@@ -160,21 +163,25 @@ class Command_uname(HoneyPotCommand):
         # All the options set, let's get the output
         output = []
 
-        if opts["name"]:
-            output.append(kernel_name())
-        if opts["node"]:
-            output.append(self.protocol.hostname)
-        if opts["release"]:
-            output.append(kernel_version())
-        if opts["version"]:
-            output.append(kernel_build_string())
-        if opts["machine"]:
-            output.append(hardware_platform())
-        if opts["os"]:
-            output.append(operating_system())
+        if self.interaction_level == 1:
+            # Restricted info at Level 1
+            output = [kernel_name(), operating_system()]
+        else:
+            if opts["name"]:
+                output.append(kernel_name())
+            if opts["node"]:
+                output.append(self.protocol.hostname)
+            if opts["release"]:
+                output.append(kernel_version())
+            if opts["version"]:
+                output.append(kernel_build_string())
+            if opts["machine"]:
+                output.append(hardware_platform())
+            if opts["os"]:
+                output.append(operating_system())
 
-        if len(output) < 1:
-            output.append(kernel_name())
+            if len(output) < 1:
+                output.append(kernel_name())
 
         self.write(" ".join(output) + "\n")
 

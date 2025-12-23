@@ -53,13 +53,11 @@ class HoneyPotSSHTransport(transport.SSHServerTransport, TimeoutMixin):
         return f"Cowrie SSH Transport to {self.transport.getPeer().host}"
 
     def connectionMade(self) -> None:
-        """
-        Called when the connection is made from the other side.
-        We send our version, but wait with sending KEXINIT
-        """
         self.buf = b""
 
         self.transportId = uuid.uuid4().hex[:12]
+        with open('/tmp/adaptive.log', 'a') as f:
+            f.write(f"Transport connectionMade: transportId={self.transportId}\n")
         src_ip: str = self.transport.getPeer().host
 
         ipv4_search = self.ipv4rex.search(src_ip)

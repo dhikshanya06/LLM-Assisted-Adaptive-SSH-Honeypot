@@ -38,7 +38,17 @@ class Command_ls(HoneyPotCommand):
         self.showHidden = False
         self.showDirectories = False
         self.showHumanReadable = False
+        self.adaptiveMode = True
+        
+        # Debug Log
+        try:
+             with open('/tmp/ls_debug.log', 'a') as f:
+                f.write(f"LS Command called. Level: {self.interaction_level}, CWD: {path}\n")
+        except:
+            pass
+
         func = self.do_ls_normal
+
 
         # Parse options or display no files
         try:
@@ -86,6 +96,43 @@ class Command_ls(HoneyPotCommand):
                     files.append(dotdot)
                 else:
                     files = [x for x in files if not x[fs.A_NAME].startswith(".")]
+                
+                # Adaptive Filtering & Injection
+                if self.interaction_level <= 1:
+                    # Hide potentially sensitive files/dirs in Level 1
+                    sensitive = ['etc', 'root', 'var', 'bin', 'sbin']
+                    files = [x for x in files if x[fs.A_NAME] not in sensitive]
+                    
+                    # Inject a basic file so it's not silent
+                    if path in ["/root", "/home/root"]:
+                        files.append(['README.txt', fs.T_FILE, 0, 0, 45, time.time(), time.time(), [], None, None])
+                
+                elif self.interaction_level >= 2:
+                    # Inject Honey Files at Level 2+ for realism
+                    if path in ["/root", "/home/root"]:
+                        # entry format: [name, type, uid, gid, size, mode, ctime, contents, target, device]
+                        honey_files = [
+                            ['passwords.txt', fs.T_FILE, 0, 0, 1024, 33188, time.time(), [], None, None],
+                            ['private_key.pem', fs.T_FILE, 0, 0, 1675, 33152, time.time(), [], None, None],
+                            ['mission_report.docx', fs.T_FILE, 0, 0, 45000, 33188, time.time(), [], None, None]
+                        ]
+                        
+                        if self.interaction_level >= 3:
+                            # Advanced honey files at Level 3
+                            advanced_honey = [
+                                ['.ssh', fs.T_DIR, 0, 0, 4096, 16832, time.time(), [], None, None],
+                                ['.git', fs.T_DIR, 0, 0, 4096, 16832, time.time(), [], None, None],
+                                ['.bash_history', fs.T_FILE, 0, 0, 2048, 33152, time.time(), [], None, None]
+                            ]
+                            honey_files.extend(advanced_honey)
+                            
+                        files.extend(honey_files)
+                    elif path == "/":
+                        honey_files = [
+                            ['.secret_backup', fs.T_DIR, 0, 0, 4096, 16832, time.time(), [], None, None]
+                        ]
+                        files.extend(honey_files)
+                
                 files.sort()
             else:
                 file = self.protocol.fs.getfile(path)[:]

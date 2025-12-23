@@ -143,6 +143,7 @@ def cowrie_start(args: list[str]) -> NoReturn:
     # Add the cowrie plugin
     twisted_args.append("cowrie")
 
+    print("ADAPTIVE STARTUP DEBUG")
     print(f"Starting cowrie: [{' '.join(twisted_args)}]...")
 
     # Check for authbind

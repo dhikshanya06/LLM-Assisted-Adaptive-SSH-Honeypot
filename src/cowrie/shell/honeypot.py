@@ -39,9 +39,23 @@ class HoneyPotShell:
             self.environ["LINES"] = str(protocol.user.windowSize[0])
         self.lexer: shlex.shlex | None = None
         self.parser = CommandParser()
+        self.interaction_level = 0
+        self.update_interaction_level()
 
         # this is the first prompt after starting
         self.showPrompt()
+
+    def update_interaction_level(self):
+        import json
+        policy_file = "/home/dhikshanya06/cowrie/var/lib/cowrie/session_policies.json"
+        if os.path.exists(policy_file):
+            try:
+                with open(policy_file, 'r') as f:
+                    policies = json.load(f)
+                    session_id = getattr(self.protocol, 'session_id', 'unknown')
+                    self.interaction_level = policies.get(str(session_id), {}).get('level', 0)
+            except Exception:
+                pass
 
     def lineReceived(self, line: str) -> None:
         log.msg(eventid="cowrie.command.input", input=line, format="CMD: %(input)s")
@@ -335,6 +349,7 @@ class HoneyPotShell:
             return output
 
     def runCommand(self):
+        self.update_interaction_level()
         pp = None
 
         def runOrPrompt() -> None:
@@ -437,6 +452,27 @@ class HoneyPotShell:
                     input=cmd["command"] + " " + " ".join(cmd["rargs"]),
                     format="Command found: %(input)s",
                 )
+            else:
+                log.msg(
+                    eventid="cowrie.command.failed",
+                    input=cmd["command"] + " " + " ".join(cmd["rargs"]),
+                    format="Command not found: %(input)s",
+                )
+            
+            # [ADAPTIVE] Global Check: Check if we should override with deceptive output
+            deceptive_output = None
+            if self.interaction_level >= 2:
+                from cowrie.adaptive.deceptive_commands import get_deceptive_output
+                deceptive_output = get_deceptive_output(cmd["command"])
+
+            if deceptive_output:
+                log.msg(f"[ADAPTIVE] Intercepting {cmd['command']} with deceptive output")
+                self.protocol.terminal.write(deceptive_output.encode("utf8"))
+                pp = None
+                break
+
+            if cmdclass:
+                # Normal execution for existing commands if no deceptive override
                 if index == len(cmd_array) - 1:
                     lastpp = PipeProtocol(
                         self.protocol,
@@ -460,14 +496,10 @@ class HoneyPotShell:
                     )
                     lastpp = pp
             else:
-                log.msg(
-                    eventid="cowrie.command.failed",
-                    input=cmd["command"] + " " + " ".join(cmd["rargs"]),
-                    format="Command not found: %(input)s",
-                )
+                # Command not found AND no deceptive output
                 message = "-bash: {}: command not found\n".format(
-                    cmd["command"]
-                ).encode("utf8")
+                        cmd["command"]
+                    ).encode("utf8")
                 redirects = cmd.get("redirects", [])
                 if redirects:
                     temp_pp = PipeProtocol(
@@ -490,6 +522,7 @@ class HoneyPotShell:
 
                 if (
                     isinstance(self.protocol, protocol.HoneyPotExecProtocol)
+
                     and not self.cmdpending
                 ):
                     exit_status = failure.Failure(error.ProcessDone(status=""))

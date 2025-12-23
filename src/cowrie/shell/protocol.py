@@ -89,6 +89,10 @@ class HoneyPotBaseProtocol(insults.TerminalProtocol, TimeoutMixin):
 
         self.factory = pt.factory
         self.sessionno = pt.transport.sessionno
+        self.session_id = getattr(pt, 'transportId', str(self.sessionno))
+        with open('/tmp/adaptive.log', 'a') as f:
+            f.write(f"Protocol: session_id={self.session_id}\n")
+        log.msg(f"[ADAPTIVE] protocol connectionMade: session_id={self.session_id}")
         self.realClientIP = pt.transport.getPeer().host
         self.realClientPort = pt.transport.getPeer().port
         self.logintime = time.time()

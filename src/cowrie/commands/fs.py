@@ -632,6 +632,31 @@ class Command_pwd(HoneyPotCommand):
         self.write(self.protocol.cwd + "\n")
 
 
+
+class Command_df(HoneyPotCommand):
+    """
+    df command
+    """
+
+    def call(self) -> None:
+        if self.interaction_level == 1:
+            self.write("Filesystem      Size  Used Avail Use% Mounted on\n")
+            self.write("rootfs          1.0G  100M  900M  10% /\n")
+            return
+
+        self.write("Filesystem                                              Size  Used Avail Use% Mounted on\n")
+        self.write("rootfs                                                  4.7G  731M  3.8G  17% /\n")
+        self.write("udev                                                     10M     0   10M   0% /dev\n")
+        self.write("tmpfs                                                    25M  192K   25M   1% /run\n")
+        self.write("/dev/disk/by-uuid/65626fdc-e4c5-4539-8745-edc212b9b0af  4.7G  731M  3.8G  17% /\n")
+        self.write("tmpfs                                                   5.0M     0  5.0M   0% /run/lock\n")
+        self.write("tmpfs                                                   101M     0  101M   0% /run/shm\n")
+
+
+commands["/bin/df"] = Command_df
+commands["df"] = Command_df
+
+
 commands["/bin/pwd"] = Command_pwd
 commands["pwd"] = Command_pwd
 

@@ -42,17 +42,51 @@ class HoneyPotCommand:
             self.errorWritefn = cast(
                 "Callable[[bytes], None]", self.protocol.pp.errReceived
             )
+        log.msg(f"[ADAPTIVE] HoneyPotCommand init for {self.__class__.__name__}")
+        self.interaction_level = self.get_interaction_level()
+
+    def get_interaction_level(self) -> int:
+        """
+        Reads the current session's interaction level from the shared policy file.
+        """
+        import json
+        import os
+        policy_file = os.path.join(os.getcwd(), "var/lib/cowrie/session_policies.json")
+        if not os.path.exists(policy_file):
+            policy_file = "/home/dhikshanya06/cowrie/var/lib/cowrie/session_policies.json"
+            
+        if os.path.exists(policy_file):
+            try:
+                with open(policy_file, 'r') as f:
+                    policies = json.load(f)
+                    session_id = getattr(self.protocol, 'session_id', 'unknown')
+                    level = policies.get(str(session_id), {}).get('level', 0)
+                    with open('/tmp/adaptive.log', 'a') as f:
+                        f.write(f"Command: session_id={session_id}, level={level}, class={self.__class__.__name__}\n")
+                    return level
+            except Exception as e:
+                with open('/tmp/adaptive.log', 'a') as f:
+                    f.write(f"Error reading policy: {str(e)}\n")
+        else:
+            with open('/tmp/adaptive.log', 'a') as f:
+                f.write(f"Policy file NOT FOUND at {policy_file}\n")
+        return 0
 
     def write(self, data: str) -> None:
         """
-        Write a string to the user on stdout
+        Write a string to the user on stdout, filtered by interaction level.
         """
+        # if self.interaction_level == 0:
+        #    # Stealth: Don't write anything or very limited
+        #    return
         self.writefn(data.encode("utf8"))
 
     def writeBytes(self, data: bytes) -> None:
         """
-        Like write() but input is bytes
+        Like write() but input is bytes, filtered by interaction level.
         """
+        # if self.interaction_level == 0:
+        #    return
         self.writefn(data)
 
     def errorWrite(self, data: str) -> None:

